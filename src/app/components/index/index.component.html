@@ -1,0 +1,23 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+      <td>First Name</td>
+      <td>Last Name</td>
+      <td>Email</td>
+      <td>Mobile Number</td>
+
+      <td colspan="2">Actions</td>
+  </tr>
+  </thead>
+
+  <tbody>
+      <tr *ngFor="let register of registers">
+          <td>{{ register.firstname }}</td>
+          <td>{{ register.lastname }}</td>
+           <td>{{ register.email }}</td>
+            <td>{{ register.mobilenumber }}</td>
+          <td><a [routerLink]="['/edit', register._id]" class="btn btn-primary">Edit</a></td>
+          <td><button (click)="deleteRegister(register._id)"  class="btn btn-danger">Delete</button></td>
+      </tr>
+  </tbody>
+</table>

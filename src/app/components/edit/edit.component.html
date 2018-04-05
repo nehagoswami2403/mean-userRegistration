@@ -1,0 +1,77 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{ title }}
+  </div>
+  <div class="panel-body">
+    <form [formGroup]="angForm" novalidate>
+      <div class="form-group">
+        <label class="col-md-4">First Name</label>
+        <input type="text" class="form-control" formControlName="firstname" #firstname [(ngModel)] = "register.firstname"/>
+      </div>
+      <div *ngIf="angForm.controls['firstname'].invalid && (angForm.controls['firstname'].dirty || angForm.controls['firstname'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['firstname'].errors.required">
+          Name is required.
+        </div>
+      </div>
+
+       <div class="form-group">
+        <label class="col-md-4">Last Name</label>
+        <input type="text" class="form-control" formControlName="lastname" #lastname [(ngModel)] = "register.lastname"/>
+      </div>
+      <div *ngIf="angForm.controls['lastname'].invalid && (angForm.controls['lastname'].dirty || angForm.controls['lastname'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['lastname'].errors.required">
+          Name is required.
+        </div>
+      </div>
+
+       <div class="form-group">
+        <label class="col-md-4">Email</label>
+        <input type="text" class="form-control" formControlName="email" #email [(ngModel)] = "register.email"/>
+      </div>
+      <div *ngIf="angForm.controls['email'].invalid && (angForm.controls['email'].dirty || angForm.controls['email'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['email'].errors.required">
+          Name is required.
+        </div>
+      </div>
+
+       <div class="form-group">
+        <label class="col-md-4">Mobile number</label>
+        <input type="text" class="form-control" formControlName="mobilenumber" minlength="10" maxlength="10" #mobilenumber [(ngModel)] = "register.mobilenumber"/>
+      </div>
+      <div *ngIf="angForm.controls['mobilenumber'].invalid && (angForm.controls['mobilenumber'].dirty || angForm.controls['mobilenumber'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['mobilenumber'].errors.required">
+          Name is required.
+        </div>
+         <div *ngIf="angForm.controls['mobilenumber'].errors.minlength">
+           Mobile number should be 10 digit
+         </div>
+         
+      <div *ngIf="angForm.controls['mobilenumber'].errors.pattern">
+      Mobile numberr should be only numbers
+    </div>
+      </div>
+     <div class="form-group">
+          <label class="col-md-4">Password</label>
+          <input type="password" class="form-control" formControlName="password" required validateEqual="confirmPassword" reverse="true" [(ngModel)] = "register.password" #password />
+        </div>
+
+          <div *ngIf="angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)" class="alert alert-danger">
+          <div *ngIf="angForm.controls['password'].errors.required">
+            Password is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4">Retype password</label>
+          <input type="password" class="form-control" formControlName="confirmPassword" required validateEqual="password" [(ngModel)] = "register.confirmPassword" #confirmPassword />
+        </div>
+          <div *ngIf="angForm.controls['confirmPassword'].invalid && (angForm.controls['confirmPassword'].dirty || angForm.controls['confirmPassword'].touched)" class="alert alert-danger">
+          <div *ngIf="angForm.controls['confirmPassword'].errors.required">
+           Password mismatch
+          </div>
+        </div>
+        <div class="form-group">
+          <button (click)="updateRegister(firstname.value, lastname.value, email.value, mobilenumber.value, confirmPassword.value, password.value )"  [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+  </div>
+</div>
